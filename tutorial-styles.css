@@ -1,0 +1,788 @@
+/* ===== Reset & Base Styles ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: #d946ef;
+  /* Magenta */
+  --primary-dark: #c026d3;
+  --secondary-color: #22d3ee;
+  /* Cyan */
+  --success-color: #34d399;
+  --warning-color: #fbbf24;
+  --bg-primary: #0f172a;
+  /* Dark Slate 900 */
+  --bg-secondary: #1e293b;
+  /* Dark Slate 800 */
+  --bg-tertiary: #334155;
+  /* Dark Slate 700 */
+  --border-color: #475569;
+  --text-primary: #f8fafc;
+  /* Slate 50 */
+  --text-secondary: #e2e8f0;
+  /* Slate 200 - Lighter for better contrast */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+code {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  background: var(--bg-tertiary);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--secondary-color);
+  /* Cyan text for code */
+}
+
+pre {
+  background: #020617;
+  /* Very dark blue/black */
+  color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--border-color);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ===== Tutorial Header ===== */
+.tutorial-header {
+  background: #D5FD7B;
+  /* Lime Green */
+  color: #0f172a;
+  /* Dark text for contrast */
+  padding: 2rem 1.5rem 1.5rem;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  text-align: center;
+  /* Fix sticky header hiccup */
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.tutorial-header h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.tutorial-header>p {
+  font-size: 1rem;
+  opacity: 0.95;
+  margin-bottom: 1rem;
+}
+
+/* ... (progress bar styles remain unchanged) ... */
+
+/* ===== Solution Boxes (Hints) ===== */
+.solution-box {
+  background: rgba(213, 253, 123, 0.1);
+  /* Lime tint */
+  border: 2px solid #D5FD7B;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  transition: all 0.3s;
+}
+
+/* ... */
+
+.btn-toggle-solution {
+  background: rgba(213, 253, 123, 0.2);
+  color: #D5FD7B;
+  /* Lime text */
+  margin: 1rem 0;
+  border: 1px solid #D5FD7B;
+}
+
+.btn-toggle-solution:hover {
+  background: rgba(213, 253, 123, 0.3);
+}
+
+.progress-bar {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  height: 24px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s ease;
+  border-radius: 12px;
+}
+
+.progress-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0f172a;
+  /* Dark text for contrast */
+  text-shadow: none;
+}
+
+/* ===== Two-Column Split View Container ===== */
+.tutorial-container {
+  display: flex;
+  gap: 0;
+  max-width: 1800px;
+  margin: 0 auto;
+  min-height: calc(100vh - 140px);
+}
+
+/* ===== Left Column: Tutorial Steps (Scrollable) ===== */
+.tutorial-steps {
+  flex: 0 0 35%;
+  max-width: 35%;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  height: calc(100vh - 140px);
+  border-right: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+/* ===== Right Column: CodePen Workspace (Sticky) ===== */
+.codepen-workspace {
+  flex: 1;
+  position: relative;
+  background: var(--bg-primary);
+}
+
+.codepen-sticky {
+  position: sticky;
+  top: 140px;
+  height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.codepen-sticky h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.codepen-hint {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.codepen-embed {
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  min-height: 0;
+}
+
+.codepen-embed iframe {
+  display: block;
+  height: 100%;
+}
+
+/* ===== Tutorial Introduction ===== */
+.tutorial-intro {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+}
+
+.tutorial-intro h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.tutorial-intro ul {
+  margin-left: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.tutorial-intro li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/* ===== Tutorial Sections ===== */
+.tutorial-section {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  scroll-margin-top: 120px;
+  border: 1px solid var(--border-color);
+}
+
+.section-header {
+  background: var(--bg-tertiary);
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+}
+
+.section-progress {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.section-checkbox:checked+span {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+/* ===== Step Cards ===== */
+.step-card {
+  padding: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  /* Ensure background is dark */
+}
+
+.step-card:last-child {
+  border-bottom: none;
+}
+
+.step-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.step-card h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.step-card p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.step-card ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.step-card li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.step-card ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.step-card ol li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/* ===== Links ===== */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Tip & Warning Boxes ===== */
+.tip-box {
+  background: rgba(59, 130, 246, 0.1);
+  /* Blue tint */
+  border-left: 4px solid var(--primary-color);
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+.tip-box strong {
+  color: var(--primary-dark);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.warning-box {
+  background: rgba(245, 158, 11, 0.1);
+  /* Orange tint */
+  border-left: 4px solid var(--warning-color);
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+.warning-box strong {
+  color: #d97706;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== Research Boxes ===== */
+.research-box {
+  background: rgba(139, 92, 246, 0.1);
+  /* Violet tint */
+  border-left: 4px solid #8b5cf6;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+.research-box strong {
+  color: #8b5cf6;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.research-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical;
+  margin-top: 0.5rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 80px;
+}
+
+.research-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* ===== Solution Boxes ===== */
+.solution-box {
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  transition: all 0.3s;
+}
+
+.solution-box.hidden {
+  display: none;
+}
+
+.solution-box h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+/* ===== Resource Links ===== */
+.resource-links {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.resource-links strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.resource-links ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.resource-links li {
+  margin-bottom: 0.375rem;
+}
+
+.resource-links a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+
+.resource-links a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Checkpoints ===== */
+.checkpoint {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 2rem;
+}
+
+.checkpoint h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.checklist {
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+.checklist li {
+  padding: 0.5rem 0;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.checklist input[type="checkbox"] {
+  margin-top: 0.3rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checklist li code {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* ===== Reflection Cards ===== */
+.reflection-card {
+  background: rgba(217, 70, 239, 0.05);
+  /* Magenta tint */
+  border: 2px solid var(--primary-dark);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 2rem 2rem;
+}
+
+.reflection-card h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.reflection-card p {
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.reflection-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.2s;
+  margin-bottom: 0.75rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.reflection-input:focus {
+  outline: none;
+  border-color: #a78bfa;
+}
+
+.reflection-input.saved {
+  border-color: var(--success-color);
+  background: #f0fdf4;
+}
+
+/* ===== Buttons ===== */
+.btn-primary,
+.btn-secondary,
+.btn-toggle-solution,
+.btn-save-reflection,
+.btn-check {
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.btn-toggle-solution {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning-color);
+  margin: 1rem 0;
+  border: 1px solid var(--warning-color);
+}
+
+.btn-toggle-solution:hover {
+  background: rgba(245, 158, 11, 0.2);
+}
+
+.btn-save-reflection {
+  background: var(--primary-dark);
+  color: white;
+}
+
+.btn-save-reflection:hover {
+  background: var(--primary-color);
+}
+
+.btn-check {
+  background: rgba(52, 211, 153, 0.1);
+  color: var(--success-color);
+  margin-top: 1rem;
+  border: 1px solid var(--success-color);
+}
+
+.btn-check:hover {
+  background: rgba(52, 211, 153, 0.2);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-toggle-solution:focus-visible,
+.btn-save-reflection:focus-visible,
+.btn-check:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* ===== Submission Section ===== */
+#submission {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-top: 1px solid var(--border-color);
+}
+
+#submission h2 {
+  padding: 1.5rem 2rem;
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.reflection-export {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1024px) {
+
+  /* Stack columns vertically on tablets and below */
+  .tutorial-container {
+    flex-direction: column;
+  }
+
+  .tutorial-steps {
+    flex: none;
+    max-width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 1rem;
+  }
+
+  .codepen-workspace {
+    flex: none;
+  }
+
+  .codepen-sticky {
+    position: relative;
+    top: 0;
+    height: 600px;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .tutorial-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .tutorial-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .tutorial-intro,
+  .step-card {
+    padding: 1.5rem;
+  }
+
+  .checkpoint,
+  .reflection-card {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    padding: 1rem;
+  }
+
+  .section-header {
+    padding: 1rem 1.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.25rem;
+  }
+
+  pre {
+    font-size: 0.75rem;
+  }
+
+  .reflection-export {
+    flex-direction: column;
+  }
+
+  .reflection-export button {
+    width: 100%;
+  }
+
+  .codepen-sticky {
+    height: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tutorial-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .tutorial-header>p {
+    font-size: 0.875rem;
+  }
+
+  .tutorial-steps {
+    padding: 1rem;
+  }
+
+  .tutorial-intro,
+  .step-card {
+    padding: 1rem;
+  }
+
+  .checkpoint,
+  .reflection-card {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .section-header {
+    padding: 1rem;
+  }
+
+  .codepen-sticky {
+    height: 400px;
+  }
+}
+
+/* ===== Utility Classes ===== */
+.hidden {
+  display: none !important;
+}
+
+.text-center {
+  text-align: center;
+}
